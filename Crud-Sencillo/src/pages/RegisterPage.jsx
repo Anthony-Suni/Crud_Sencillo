@@ -37,7 +37,7 @@ export const RegisterPage = () => {
 
       if (response.ok) {
         // Redireccionar a la página de dashboard si la petición es exitosa
-        navigate('/dashboard', {
+        navigate('/login', {
           replace: true,
           state: {
             logged: true,

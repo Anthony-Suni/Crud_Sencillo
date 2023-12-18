@@ -17,13 +17,23 @@ export const AppRouter = () => {
           <Route path='login' element={<Pages.LoginPage />} />
           <Route path='register' element={<Pages.RegisterPage />} />
           <Route
-            path='dashboard'
+            path='user-dashboard'
             element={
-              <PrivateRoute>
-                <Pages.DashboardPage />
-              </PrivateRoute>
+              
+                <Pages.DashboardPageUser />
+       
             }
           />
+          <Route
+            path='admin-dashboard'
+            element={
+           
+                <Pages.DashboardPageAdmin />
+           
+            }
+          />
+
+
         </Route>
       </Routes>
     </>

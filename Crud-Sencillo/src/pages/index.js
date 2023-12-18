@@ -1,5 +1,6 @@
 // src/pages/index.js
-export { default as DashboardPage } from './DashboardPage';
+export { default as DashboardPageAdmin } from './DashboardPageAdmin';
+export { default as DashboardPageUser } from './DashboardPageUser';
 export { default as HomePage } from './HomePage';
 export { default as UsersPage } from './UsersPage';
 export { default as LoginPage } from './LoginPage';

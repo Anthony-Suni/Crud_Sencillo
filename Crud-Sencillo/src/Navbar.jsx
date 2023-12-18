@@ -28,10 +28,13 @@ export const Navbar = () => {
           </div>
         ) : (
           <nav>
-            <Link to='/users'>Users</Link>
-            <Link to='/login'>Admin</Link>
-            <Link to='/register'>Registro</Link>
-            <Link to='/rating'>Ver Ratings</Link>
+            
+            <Link to='/login'>login</Link>
+            <Link to='/register'>Registro</Link> 
+            
+            {/* <Link to='/rating'>Ver Ratings</Link> */}
+            {/* <Link to='/register'>Registro</Link> */}
+            {/* <Link to='/users'>Users</Link> */}
           </nav>
         )}
       </header>
@@ -40,3 +43,4 @@ export const Navbar = () => {
     </>
   );
 };
+

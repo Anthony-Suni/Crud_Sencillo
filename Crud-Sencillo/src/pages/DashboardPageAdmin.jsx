@@ -9,7 +9,7 @@ const url = 'http://ip172-18-0-19-clvo57ss9otg00988mhg-8080.direct.labs.play-wit
 const moviesApiUrl = 'http://ip172-18-0-19-clvo57ss9otg00988mhg-8080.direct.labs.play-with-docker.com/api/movies';
 
 
-class DashboardPage extends Component {
+class DashboardPageAdmin extends Component {
   state = {
     data: [],
     movies: [],
@@ -391,6 +391,6 @@ class DashboardPage extends Component {
   }
 }
 
-export default DashboardPage;
+export default DashboardPageAdmin;
 
 
