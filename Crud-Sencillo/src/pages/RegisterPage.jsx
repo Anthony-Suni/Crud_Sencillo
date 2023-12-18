@@ -2,29 +2,57 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../hook/useForm';
 
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap styles
+import 'bootstrap/dist/css/bootstrap.min.css'; // Importar estilos de Bootstrap
 
 export const RegisterPage = () => {
   const navigate = useNavigate();
 
-  const { name, email, password, onInputChange, onResetForm } = useForm({
-    name: '',
-    email: '',
-    password: '',
+  const { gender, age, occupation, zipCode, onInputChange, onResetForm } = useForm({
+    gender: null,
+    age: null,
+    occupation: null,
+    zipCode: null,
   });
 
-  const onRegister = (e) => {
+  const onRegister = async (e) => {
     e.preventDefault();
 
-    navigate('/dashboard', {
-      replace: true,
-      state: {
-        logged: true,
-        name,
-      },
-    });
+    try {
+      // Crear un objeto con los datos a enviar, excluyendo "id"
+      const userData = {
+        gender,
+        age,
+        occupation,
+        zipCode,
+      };
 
-    onResetForm();
+      // Realizar la petición POST al servidor API
+      const response = await fetch('http://ip172-18-0-37-clvuklks9otg00988vsg-8080.direct.labs.play-with-docker.com/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.ok) {
+        // Redireccionar a la página de dashboard si la petición es exitosa
+        navigate('/dashboard', {
+          replace: true,
+          state: {
+            logged: true,
+          },
+        });
+
+        // Resetear el formulario después del registro
+        onResetForm();
+      } else {
+        // Manejar errores en caso de una respuesta no exitosa
+        console.error('Error al registrar el usuario');
+      }
+    } catch (error) {
+      console.error('Error de red:', error.message);
+    }
   };
 
   return (
@@ -33,49 +61,61 @@ export const RegisterPage = () => {
         <h1 className='mb-4'>Registrarse</h1>
 
         <div className='mb-3'>
-          <label htmlFor='name' className='form-label'>
-            Nombre:
+          <label htmlFor='gender' className='form-label'>
+            Género:
           </label>
           <input
             type='text'
             className='form-control'
-            id='name'
-            name='name'
-            value={name}
+            id='gender'
+            name='gender'
+            value={gender}
             onChange={onInputChange}
-            required
             autoComplete='off'
           />
         </div>
 
         <div className='mb-3'>
-          <label htmlFor='email' className='form-label'>
-            Email:
+          <label htmlFor='age' className='form-label'>
+            Edad:
           </label>
           <input
-            type='email'
+            type='text'
             className='form-control'
-            id='email'
-            name='email'
-            value={email}
+            id='age'
+            name='age'
+            value={age}
             onChange={onInputChange}
-            required
             autoComplete='off'
           />
         </div>
 
         <div className='mb-3'>
-          <label htmlFor='password' className='form-label'>
-            Contraseña:
+          <label htmlFor='occupation' className='form-label'>
+            Ocupación:
           </label>
           <input
-            type='password'
+            type='text'
             className='form-control'
-            id='password'
-            name='password'
-            value={password}
+            id='occupation'
+            name='occupation'
+            value={occupation}
             onChange={onInputChange}
-            required
+            autoComplete='off'
+          />
+        </div>
+
+        <div className='mb-3'>
+          <label htmlFor='zipCode' className='form-label'>
+            zipCode:
+          </label>
+          <input
+            type='text'
+            className='form-control'
+            id='zipCode'
+            name='zipCode'
+            value={zipCode}
+            onChange={onInputChange}
             autoComplete='off'
           />
         </div>
